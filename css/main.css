@@ -7,3 +7,21 @@ body {
     margin-top: 50px;
 }
 
+#rating {
+    padding: 0;
+}
+.star-rating{
+    display: block;
+}
+
+.stars-container {
+    font-size: 30px;
+}
+
+.stars-container .star {
+    cursor: pointer;
+}
+
+.star.hover {
+    color: gold;
+}

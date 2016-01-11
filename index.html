@@ -1,16 +1,21 @@
 <!DOCTYPE>
 <html>
 <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/main.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
     <script type="text/html" id="tpl">
         <tr  data-id="<%=id%>">
-            <td><%=city%></td>
+            <td><%=name%></td>
+            <!--<td><%=city%></td>-->
             <td><%=stars%></td>
+            <!--<td><input type="text" class="stars" name="review" value="0" /></td>-->
             <td><%=visited%></td>
+            <td><a href="#" class="edit-btn">Edit</a></td>
             <td><a href="#" class="remove-btn">Remove</a></td>
+
         </tr>
     </script>
     <div class="container">
@@ -23,17 +28,24 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="form-group">
+                        <label class="star-rating">Stars</label>
+                        <input type="text" class="stars" name="review" value="0" />
+                    </div>
+                </div>
+                <div class="row">
                     <div class="checkbox">
                         <label><input id = "cb" type="checkbox" name="visited">Visited</label>
                     </div>
                 </div>
                 <div class="row">
+                    <input type="hidden" name="iou" value="0" />
                     <button id="bt" type="submit" class="btn" name="submit">Save</button>
                 </div>
             </form>
         </div>
 
-            <div class="col-md-4 col-md-offset-1 top-buffer">
+            <div class="col-md-5 col-md-offset-1 top-buffer">
                 <div class="table-responsive">
                     <table id="my-table" class="table table-striped">
                         <thead>
@@ -52,9 +64,11 @@
             </div>
     </div>
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/template-engine.js"> </script>
     <script src="js/store.js"> </script>
+    <script src="js/stars.jquery.js"> </script>
+    <script src="js/confirm.jquery.js"> </script>
     <script src="js/main.js"> </script>
 
 </body>
