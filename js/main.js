@@ -1,30 +1,26 @@
 $(document).ready(function () {
-
-    $( document ).ajaxStart(function() {
-        $( ".gif" ).show();
-    });
-    $( document ).ajaxStop(function() {
-        $( ".gif" ).hide();
-    });
-
+    loading();
     var starsPlugin = $('[name="review"]').stars();
     var page =  1;
     var pageNumber = 1;
-    $('.previous').click(function(){
-        if (page > 1) {
-            $('.pagination').text(--page+" of "+pageNumber);
-            drawTable(store);
-        }
-    });
-    $('.next').click(function(){
-        if (page < pageNumber) {
-            $('.pagination').text(++page + " of " + pageNumber);
-            drawTable(store);
-        }
-    });
+    var pagination = function() {
+        $('.previous').click(function(){
+            if (page > 1) {
+                $('.pagination').text(--page+" of "+pageNumber);
+                drawTable(store);
+            }
+        });
+        $('.next').click(function(){
+            if (page < pageNumber) {
+                $('.pagination').text(++page + " of " + pageNumber);
+                drawTable(store);
+            }
+        });
+    }
 
     var drawTable = function (store) {
-        store.getAll(page).then(function (data) {
+        store.getAll(page).then(
+            function (data) {
             pageNumber = data.totalPages;
             $('.pagination').text(page+" of "+pageNumber);
             $('tbody').empty();
@@ -35,7 +31,11 @@ $(document).ready(function () {
                 $("tbody").append(s);
             });
             attachEvents();
-        });
+        },
+            function (data) {
+                alert(data.error);
+            }
+        );
     };
 
     drawTable(store);
@@ -88,9 +88,14 @@ $(document).ready(function () {
             onConfirm: function() {
                 console.log(this, 'yes!');
                 var rowId = $(this).closest('tr').data('id');
-                store.delete(rowId).then(function() {
-                    drawTable(store);
-                });
+                store.delete(rowId).then(
+                    function() {
+                        drawTable(store);
+                },
+                    function() {
+                        alert(data.error);
+                    }
+                );
             }
         });
     };
@@ -98,12 +103,17 @@ $(document).ready(function () {
     var editRow = function() {
         $('.edit-btn').click(function() {
             var rowId = $(this).closest('tr').data('id');
-            store.get(rowId).then(function(data) {
-                $('#city').val(data.name);
-                $('#cb').prop('checked', data.visited);
-                $('.stars').val(data.stars).change();
-                $('[name="iou"]').val(data.id);
-            });
+            store.get(rowId).then(
+                function(data) {
+                    $('#city').val(data.name);
+                    $('#cb').prop('checked', data.visited);
+                    $('.stars').val(data.stars).change();
+                    $('[name="iou"]').val(data.id);
+                },
+                function (data) {
+                    alert(data.error);
+                }
+            );
         });
     };
 
@@ -114,4 +124,12 @@ $(document).ready(function () {
 
 });
 
+var loading = function() {
+    $( document ).ajaxStart(function() {
+        $( ".gif" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( ".gif" ).hide();
+    });
+}
 
