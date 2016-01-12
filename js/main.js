@@ -1,8 +1,30 @@
 $(document).ready(function () {
+
+    $( document ).ajaxStart(function() {
+        $( ".gif" ).show();
+    });
+    $( document ).ajaxStop(function() {
+        $( ".gif" ).hide();
+    });
+
     var starsPlugin = $('[name="review"]').stars();
+    var page =  1;
+    var pageNumber = 1;
+    $('.previous').click(function(){
+        if (page > 1) {
+            $('.pagination').text(--page+" of "+pageNumber);
+            drawTable(store);
+        }
+    });
+    $('.next').click(function(){
+        $('.pagination').text(++page+" of "+pageNumber);
+        drawTable(store);
+    });
 
     var drawTable = function (store) {
-        store.getAll().then(function (data) {
+        store.getAll(page).then(function (data) {
+            pageNumber = data.totalPages;
+            $('.pagination').text(page+" of "+pageNumber);
             $('tbody').empty();
             $.each(data.list, function (index) {
                 data.list[index].stars = starsPlugin.activeStars(data.list[index].stars);
@@ -34,7 +56,7 @@ $(document).ready(function () {
                 function (data) {
                     alert(data.error);
                 }
-             );
+            );
         } else {
             index = iou;
             store.update(index, getVal()).then(
@@ -75,13 +97,13 @@ $(document).ready(function () {
         $('.edit-btn').click(function() {
             var rowId = $(this).closest('tr').data('id');
             store.get(rowId).then(function(data) {
-                        $('#city').val(data.name);
-                        $('#cb').prop('checked', data.visited);
-                        $('.stars').val(data.stars).change();
-                        $('[name="iou"]').val(data.id);
-                });
+                $('#city').val(data.name);
+                $('#cb').prop('checked', data.visited);
+                $('.stars').val(data.stars).change();
+                $('[name="iou"]').val(data.id);
             });
-        };
+        });
+    };
 
     var attachEvents = function() {
         removeRow();
@@ -89,7 +111,5 @@ $(document).ready(function () {
     };
 
 });
-
-
 
 

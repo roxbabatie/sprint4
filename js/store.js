@@ -19,15 +19,11 @@ var store = (function () {
                 });
             });
         },
-        getAll: function () {
+        getAll: function (page) {
             return new Promise(function (resolve, reject) {
-                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries"
-                    //+"?page="+page;
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries?page="+page;
                 var getSettings = {
                     type: 'GET',
-                    //page: data.page,
-                    //perPage: data.perPage,
-                    //totalPages: data.totalPages,
                     headers: {'Content-Type': 'application/json'}
                 };
                 var ajaxResult = $.ajax(entriesUrl, getSettings);

@@ -9,9 +9,7 @@
     <script type="text/html" id="tpl">
         <tr  data-id="<%=id%>">
             <td><%=name%></td>
-            <!--<td><%=city%></td>-->
             <td><%=stars%></td>
-            <!--<td><input type="text" class="stars" name="review" value="0" /></td>-->
             <td><%=visited%></td>
             <td><a href="#" class="edit-btn">Edit</a></td>
             <td><a href="#" class="remove-btn">Remove</a></td>
@@ -60,9 +58,21 @@
                         <tr></tr>
                         </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md-5 col-md-offset-4">
+                        <a href="#" class="previous"><<</a>
+                        <div class="pagination">1 of 5</div>
+                        <a href="#" class="next">>></a>
+                        </div>
+                    </div>
                 </div>
             </div>
+        <div class="gif"><img src="img/loader.gif"</div>
+
+
+
     </div>
+
 
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/template-engine.js"> </script>
