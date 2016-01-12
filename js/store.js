@@ -1,45 +1,91 @@
 var store = (function () {
-    var id =  1;
-    var data = [
-        {
-            id: 1,
-            city: 'Bucharest',
-            stars: 3,
-            visited: true
-        }
-    ];
+    var id =  0;
+    var data = [];
     //public
     return {
+        get :  function(id) {
+            return new Promise(function (resolve, reject) {
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries/"+id;
+                var getSettings = {
+                    type: 'GET',
+                    headers: {'Content-Type': 'application/json'}
+                };
+                var ajaxResult = $.ajax(entriesUrl, getSettings);
+                ajaxResult.done(function(d) {
+                    resolve(d);
+                });
+                ajaxResult.error(function(d) {
+                    reject(d.responseJSON);
+                });
+            });
+        },
         getAll: function () {
             return new Promise(function (resolve, reject) {
-                resolve(data);
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries"
+                    //+"?page="+page;
+                var getSettings = {
+                    type: 'GET',
+                    //page: data.page,
+                    //perPage: data.perPage,
+                    //totalPages: data.totalPages,
+                    headers: {'Content-Type': 'application/json'}
+                };
+                var ajaxResult = $.ajax(entriesUrl, getSettings);
+                ajaxResult.done(function(d) {
+                    resolve(d);
+                });
+                ajaxResult.error(function(d) {
+                    reject(d.responseJSON);
+                });
             });
-            //return data;
         },
         add: function (item) {
             return new Promise(function (resolve, reject) {
-                data.push(item);
-                item.id = ++id;
-                resolve(data);
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries";
+                var postSettings = {
+                    type: 'POST',
+                    data: JSON.stringify(item),
+                    headers: {'Content-Type': 'application/json'}
+                };
+                var ajaxResult = $.ajax(entriesUrl, postSettings);
+                ajaxResult.done(function(d) {
+                    resolve(d);
+                });
+                ajaxResult.error(function(d) {
+                    reject(d.responseJSON);
+                });
             });
         },
         update: function (id, updateData) {
             return new Promise(function (resolve, reject) {
-                $.each(data, function (index) {
-                    if (this.id == id) {
-                        data[index] = updateData;
-                        resolve(data);
-                    }
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries/"+id;
+                var putSettings = {
+                    type: 'PUT',
+                    data: JSON.stringify(updateData),
+                    headers: {'Content-Type': 'application/json' }
+                };
+                var ajaxResult = $.ajax(entriesUrl, putSettings);
+                ajaxResult.done(function(d) {
+                    resolve(d);
+                });
+                ajaxResult.error(function(d) {
+                    reject(d.responseJSON);
                 });
             });
         },
         delete: function (id) {
             return new Promise(function (resolve, reject) {
-                $.each(data, function (index) {
-                    if (this.id == id) {
-                        data.splice(index, 1);
-                        resolve(data);
-                    }
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries/"+id;
+                var deleteSettings = {
+                    type: 'DELETE',
+                    headers: {'Content-Type': 'application/json'}
+                };
+                var ajaxResult = $.ajax(entriesUrl, deleteSettings);
+                ajaxResult.done(function(d) {
+                    resolve(d);
+                });
+                ajaxResult.error(function(d) {
+                    reject(d.responseJSON);
                 });
             });
         }
