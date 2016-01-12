@@ -17,8 +17,10 @@ $(document).ready(function () {
         }
     });
     $('.next').click(function(){
-        $('.pagination').text(++page+" of "+pageNumber);
-        drawTable(store);
+        if (page < pageNumber) {
+            $('.pagination').text(++page + " of " + pageNumber);
+            drawTable(store);
+        }
     });
 
     var drawTable = function (store) {
