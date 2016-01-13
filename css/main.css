@@ -2,26 +2,33 @@ body {
     font-family: sans-serif;
     font-size: 14px;
 }
-
 .container {
     margin-top: 50px;
 }
-
 #rating {
     padding: 0;
 }
 .star-rating{
     display: block;
 }
-
 .stars-container {
     font-size: 30px;
 }
-
 .stars-container .star {
     cursor: pointer;
 }
-
 .star.hover {
     color: gold;
 }
+.glyphicon {
+    margin-left: 60px;
+    margin-right: 0;
+}
+.edit-btn {
+    border: 1px solid black;
+    width: 60px;
+}
+
+
+
+

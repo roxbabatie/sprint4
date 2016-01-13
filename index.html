@@ -11,9 +11,10 @@
             <td><%=name%></td>
             <td><%=stars%></td>
             <td><%=visited%></td>
-            <td><a href="#" class="edit-btn">Edit</a></td>
-            <td><a href="#" class="remove-btn">Remove</a></td>
-
+            <td>
+                <button type="button" class="edit-btn btn btn-primary">Edit</button>
+                <button type="button" class="remove-btn btn btn-danger">Remove</button>
+            </td>
         </tr>
     </script>
     <div class="container">
@@ -38,19 +39,19 @@
                 </div>
                 <div class="row">
                     <input type="hidden" name="iou" value="0" />
-                    <button id="bt" type="submit" class="btn" name="submit">Save</button>
+                    <button id = "bt" type="submit" class="btn btn-success" name="submit">Save</button>
                 </div>
             </form>
         </div>
 
-            <div class="col-md-5 col-md-offset-1 top-buffer">
+            <div class="col-md-7 col-md-offset-1 top-buffer">
                 <div class="table-responsive">
                     <table id="my-table" class="table table-striped">
                         <thead>
                         <tr>
-                            <th>City</th>
-                            <th>Stars</th>
-                            <th>Visited</th>
+                            <th id="name-field" class="both">City<span class="glyphicon glyphicon-sort"></span></th>
+                            <th id="stars-field" class="both">Stars<span class="glyphicon glyphicon-sort"></span></th>
+                            <th id="visited-field" class="both">Visited<span class="glyphicon glyphicon-sort"></span></th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -68,11 +69,7 @@
                 </div>
             </div>
         <div class="gif"><img src="img/loader.gif"</div>
-
-
-
     </div>
-
 
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/template-engine.js"> </script>

@@ -19,9 +19,9 @@ var store = (function () {
                 });
             });
         },
-        getAll: function (page) {
+        getAll: function (page, sortDir, sortField) {
             return new Promise(function (resolve, reject) {
-                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries?page="+page;
+                var entriesUrl = "http://server.godev.ro:8080/api/roxanab/entries?sortDir="+sortDir+"&sortField="+sortField+"&page="+page;
                 var getSettings = {
                     type: 'GET',
                     headers: {'Content-Type': 'application/json'}
