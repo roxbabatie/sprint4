@@ -1,50 +1,19 @@
 $(document).ready(function () {
-    loading();
-    pagination();
-    getVal();
-    $('#my-form').submit(function () {
-        var iou = $('[name="iou"]').val();
-        if (iou == '0') {
-            store.add(getVal()).then(
-                function (data) {
-                    drawTable(store);
-                    resetForm();
-                },
-                function (data) {
-                    alert(data.error);
-                }
-            );
-        } else {
-            store.update(iou, getVal()).then(
-                function (data) {
-                    drawTable(store);
-                    resetForm();
-                },
-                function (data) {
-                    alert(data.error); }
-            );
-        };
-        return false;
-    });
-    resetForm();
     drawTable(store);
-    sorting();
 });
 
 var starsPlugin = $('[name="review"]').stars();
 var page =  1;
 var pageNumber = 1;
 
-function loading() {
-    $( document ).ajaxStart(function() {
-        $( ".gif" ).show();
-    });
-    $( document ).ajaxStop(function() {
-        $( ".gif" ).hide();
-    });
-};
+$( document ).ajaxStart(function() {
+    $( ".gif" ).show();
+});
+$( document ).ajaxStop(function() {
+    $( ".gif" ).hide();
+});
 
-function pagination(){
+function pagination() {
     $('.previous').click(function(){
         if (page > 1) {
             $('.pagination').text(--page +" of "+pageNumber);
@@ -57,7 +26,32 @@ function pagination(){
             drawTable(store, page);
         }
     });
-};
+}
+
+$('#my-form').submit(function () {
+    var iou = $('[name="iou"]').val();
+    if (iou == '0') {
+        store.add(getVal()).then(
+            function (data) {
+                drawTable(store);
+                resetForm();
+            },
+            function (data) {
+                alert(data.error);
+            }
+        );
+    } else {
+        store.update(iou, getVal()).then(
+            function (data) {
+                drawTable(store);
+                resetForm();
+            },
+            function (data) {
+                alert(data.error); }
+        );
+    };
+    return false;
+});
 
 function getVal() {
     return {
@@ -65,14 +59,14 @@ function getVal() {
         stars: parseInt($('.stars').val()),
         visited: $('#cb:checkbox:checked').length > 0 ? 1 : 0
     }
-};
+}
 
 function resetForm() {
     $('.form-control').val('');
     $('[name="visited"]').attr('checked', false);
     $('[name="iou"]').val('0');
     $('[name="review"]').val('0').change();
-};
+}
 
 function removeRow() {
     $('.remove-btn').confirm({
@@ -89,7 +83,7 @@ function removeRow() {
             );
         }
     });
-};
+}
 
 function editRow() {
     $('.edit-btn').click(function() {
@@ -106,13 +100,13 @@ function editRow() {
             }
         );
     });
-};
+}
 
 function attachEvents() {
     removeRow();
     editRow();
     pagination();
-};
+}
 
 function drawTable(store, pg, sDir, sField) {
     sDir = typeof sDir !== 'undefined' ? sDir : 'asc';
@@ -135,7 +129,7 @@ function drawTable(store, pg, sDir, sField) {
             alert(data.error);
         }
     );
-};
+}
 
 function defaultClass(thClass) {
     for (var i=0; i<=thClass.length; i++) {
@@ -145,30 +139,28 @@ function defaultClass(thClass) {
         $("#"+thClass[i]).append( "<span></span>");
         $("#"+thClass[i]).find("span").addClass('glyphicon glyphicon-sort');
     }
-};
+}
 
-function sorting() {
-    $('#name-field').click(function(){
-        defaultClass(['stars-field', 'visited-field']);
-        var sortField = "name";
-        var sortDir = $('#name-field').attr("class");
-        getParameters(sortField, sortDir);
-    });
+$('#name-field').click(function(){
+    defaultClass(['stars-field', 'visited-field']);
+    var sortField = "name";
+    var sortDir = $('#name-field').attr("class");
+    getParameters(sortField, sortDir);
+});
 
-    $('#stars-field').click(function(){
-        defaultClass(['name-field', 'visited-field']);
-        var sortField = "stars";
-        var sortDir = $('#stars-field').attr("class");
-        getParameters(sortField, sortDir);
-    });
+$('#stars-field').click(function(){
+    defaultClass(['name-field', 'visited-field']);
+    var sortField = "stars";
+    var sortDir = $('#stars-field').attr("class");
+    getParameters(sortField, sortDir);
+});
 
-    $('#visited-field').click(function(){
-        defaultClass(['name-field', 'stars-field']);
-        var sortField = "visited";
-        var sortDir = $('#visited-field').attr("class");
-        getParameters(sortField, sortDir);
-    });
-};
+$('#visited-field').click(function(){
+    defaultClass(['name-field', 'stars-field']);
+    var sortField = "visited";
+    var sortDir = $('#visited-field').attr("class");
+    getParameters(sortField, sortDir);
+});
 
 var getParameters = function(field, direction) {
     var dir = "";
