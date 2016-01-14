@@ -6,17 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 </head>
 <body>
-    <script type="text/html" id="tpl">
-        <tr  data-id="<%=id%>">
-            <td><%=name%></td>
-            <td><%=stars%></td>
-            <td><%=visited%></td>
-            <td>
-                <button type="button" class="edit-btn btn btn-primary">Edit</button>
-                <button type="button" class="remove-btn btn btn-danger">Remove</button>
-            </td>
-        </tr>
-    </script>
     <div class="container">
         <div class="col-md-3 top-buffer">
             <form id="my-form">
@@ -49,9 +38,9 @@
                     <table id="my-table" class="table table-striped">
                         <thead>
                         <tr>
-                            <th id="name-field" class="both">City<span class="glyphicon glyphicon-sort"></span></th>
-                            <th id="stars-field" class="both">Stars<span class="glyphicon glyphicon-sort"></span></th>
-                            <th id="visited-field" class="both">Visited<span class="glyphicon glyphicon-sort"></span></th>
+                            <th class="to-sort" data-field="name" data-dir="asc">City<span class="glyphicon glyphicon-sort"></span></th>
+                            <th class="to-sort" data-field="stars" data-dir="asc">Stars <span class="glyphicon glyphicon-sort"></span></th>
+                            <th class="to-sort" data-field="visited" data-dir="asc">Visited <span class="glyphicon glyphicon-sort"></span></th>
                             <th>Actions</th>
                         </tr>
                         </thead>
@@ -70,7 +59,17 @@
             </div>
         <div class="gif"><img src="img/loader.gif"</div>
     </div>
-
+    <script type="text/html" id="tpl">
+        <tr  data-id="<%=id%>">
+            <td><%=name%></td>
+            <td class="star hover"><%=stars%></td>
+            <td><%=visited%></td>
+            <td>
+                <button type="button" class="edit-btn btn btn-primary">Edit</button>
+                <button type="button" class="remove-btn btn btn-danger">Remove</button>
+            </td>
+        </tr>
+    </script>
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="js/template-engine.js"> </script>
     <script src="js/store.js"> </script>

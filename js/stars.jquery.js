@@ -83,14 +83,5 @@ $.fn.stars = function(options) {
             }
         }
     });
-
-    $this.activeStars = function(num) {
-        var stars = '';
-        for (i = 0; i < num; i++) {
-            stars += '<span class="star hover">★</span>';
-        }
-        return stars;
-    };
-
     return $this;
 };
