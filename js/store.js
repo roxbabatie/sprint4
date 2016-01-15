@@ -59,7 +59,7 @@ var store = (function () {
                     data: JSON.stringify(updateData),
                     headers: {'Content-Type': 'application/json' }
                 };
-                var ajaxResult = $.ajax(entriesUrl+"//"+id, putSettings);
+                var ajaxResult = $.ajax(entriesUrl+"/"+id, putSettings);
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
