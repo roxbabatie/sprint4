@@ -98,6 +98,7 @@ function attachEvents() {
     $('.edit-btn').click(editRow);
     $('#previous').click(paginationPrev);
     $('#next').click(paginationNext);
+    $('.giphy-name').click(getGiphy);
 }
 
 function drawTable(store) {
@@ -136,7 +137,23 @@ function sort() {
             break;
     }
     drawTable(store);
-};
+}
+
+function getGiphy() {
+    var cityName = $(this).text();
+    giphy.get(cityName).then(
+        function(response) {
+            $('.modal-body').empty();
+            $('#search-term').text("Search term: "+cityName+" results: "+(response.data).length);
+            $('#myModal').modal('toggle');
+            if (response.data[0]) {
+                var imgObj = response.data[0];
+                $('.modal-body').append('<img src='+imgObj.images.downsized_large.url+' width="400" height="300" />');
+            } else {
+                $('.modal-body').append('<img src="https://media.giphy.com/media/xT0GUyE9JKNNSHOnHq/giphy.gif" width="400" height="300" />');
+            }
+        });
+}
 
 
 

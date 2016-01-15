@@ -28,6 +28,10 @@ body {
     border: 1px solid black;
     width: 60px;
 }
+.modal-lg {
+    width: 430px;
+    height: 300px;
+}
 
 
 
