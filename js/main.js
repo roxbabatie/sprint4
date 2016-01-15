@@ -8,6 +8,7 @@ $(document).ready(function () {
     });
     $('#my-form').submit(onSubmit);
     $('#my-table').find('.to-sort').click(sort);
+
     drawTable(store);
 });
 
@@ -45,7 +46,6 @@ function onSubmit() {
             function (data) {
                 alert(data);
             }
-
         );
     } else {
         store.update(iou, getVal).then(
@@ -98,9 +98,9 @@ function editRow() {
 function attachEvents() {
     $('.remove-btn').confirm({message: 'Are you sure?', onConfirm: removeRow });
     $('.edit-btn').click(editRow);
-    $('#previous').click(paginationPrev);
-    $('#next').click(paginationNext);
     $('.giphy-name').click(getGiphy);
+    $('.previous').click(paginationPrev);
+    $('.next').click(paginationNext);
 }
 
 function drawTable(store) {
