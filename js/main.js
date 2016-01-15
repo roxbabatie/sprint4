@@ -43,8 +43,9 @@ function onSubmit() {
                 drawTable(store);
             },
             function (data) {
-                alert(data.error);
+                alert(data);
             }
+
         );
     } else {
         store.update(iou, getVal).then(
@@ -52,7 +53,8 @@ function onSubmit() {
                 drawTable(store);
             },
             function (data) {
-                alert(data.error); }
+                alert(data);
+            }
         );
     };
     resetForm();
@@ -72,8 +74,8 @@ function removeRow() {
         function(data) {
             drawTable(store);
         },
-        function(data) {
-            alert(data.error);
+        function (data) {
+            alert(data);
         }
     );
 }
@@ -88,7 +90,7 @@ function editRow() {
             $('[name="iou"]').val(data.id);
         },
         function (data) {
-            alert(data.error);
+            alert(data);
         }
     );
 }
@@ -117,7 +119,7 @@ function drawTable(store) {
             attachEvents();
         },
         function (data) {
-            alert(data.error);
+            alert(data);
         }
     );
 }
@@ -144,7 +146,7 @@ function getGiphy() {
     giphy.get(cityName).then(
         function(response) {
             $('.modal-body').empty();
-            $('#search-term').text("Search term: "+cityName+" results: "+(response.data).length);
+            $('#search-term').text("Search term: "+cityName+" Results: "+(response.data).length);
             $('#myModal').modal('toggle');
             if (response.data[0]) {
                 var imgObj = response.data[0];

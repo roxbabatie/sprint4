@@ -5,7 +5,7 @@ var store = (function () {
             if(xhr.status == 409) {
                 reject(xhr.responseJSON.error);
             } else {
-                alert('An unknown error occurred');
+                reject('An unknown error occurred');
             }
         };
     };
@@ -21,9 +21,7 @@ var store = (function () {
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
-                ajaxResult.error(function(d) {
-                    reject(d.responseJSON);
-                });
+                ajaxResult.fail(errorHandler(reject));
 
             });
         },
@@ -37,9 +35,7 @@ var store = (function () {
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
-                ajaxResult.error(function(d) {
-                    reject(d.responseJSON);
-                });
+                ajaxResult.fail(errorHandler(reject));
             });
         },
         add: function (item) {
@@ -53,9 +49,7 @@ var store = (function () {
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
-                ajaxResult.error(function(d) {
-                    reject(d.responseJSON);
-                });
+                ajaxResult.fail(errorHandler(reject));
             });
         },
         update: function (id, updateData) {
@@ -69,9 +63,7 @@ var store = (function () {
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
-                ajaxResult.error(function(d) {
-                    reject(d.responseJSON);
-                });
+                ajaxResult.fail(errorHandler(reject));
             });
         },
         delete: function (id) {
@@ -84,9 +76,7 @@ var store = (function () {
                 ajaxResult.done(function(d) {
                     resolve(d);
                 });
-                ajaxResult.error(function(d) {
-                    reject(d.responseJSON);
-                });
+                ajaxResult.fail(errorHandler(reject));
             });
         }
     };
